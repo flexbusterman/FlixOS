@@ -200,11 +200,36 @@ services.mullvad-vpn.enable = true;
      ];
     };
 
-		windowManager.xmonad = {
-			enable = true;
-			enableContribAndExtras = true;
-			# config = builtins.readFile ./dotfiles/xmonad/xmonad.hs;
-		};
+		windowManager.qtile.enable = true;
+
+# windowManager.dwm.package = pkgs.dwm.override {
+# 	conf = ./config.def.h;
+#   patches = [
+#     # for local patch files, replace with relative path to patch file
+#     # ./path/to/local.patch
+#     # for external patches
+#     (pkgs.fetchpatch {
+# 			# https://dwm.suckless.org/patches/systray/
+#       url = "https://dwm.suckless.org/patches/systray/dwm-systray-20230922-9f88553.diff";
+#       # replace hash with the value from `nix-prefetch-url "https://dwm.suckless.org/patches/path/to/patch.diff" | xargs nix hash to-sri --type sha256`
+#       # or just leave it blank, rebuild, and use the hash value from the error
+#       hash = "sha256-KeNXvXTxgAFomP/68hljeVLHd9JvXy8WHQ+66nQZCKE=";
+#     })
+#   ];
+# };
+
+# windowManager.dwm.enable = true;
+
+		# windowManager.xmonad = {
+		# 	enable = true;
+		# 	enableContribAndExtras = true;
+		# 	# config = builtins.readFile ./dotfiles/xmonad/xmonad.hs;
+		# 	ghcArgs = [
+		# 		"-hidir /tmp" # place interface files in /tmp, otherwise ghc tries to write them to the nix store
+		# 		"-odir /tmp" # place object files in /tmp, otherwise ghc tries to write them to the nix store
+		# 		"-i${xmonad-contexts}" # tell ghc to search in the respective nix store path for the module
+		# 	];
+		# };
 
 		#	displayManager.lightdm.enable = true;
 		# desktopManager.xfce.enable = true;
@@ -290,6 +315,7 @@ users.defaultUserShell = pkgs.zsh;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+		python3
     haskellPackages.xmobar
     haskellPackages.xmonad
     haskellPackages.xmonad-contrib
