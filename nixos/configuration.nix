@@ -58,7 +58,7 @@ fonts.packages = with pkgs; [
 	ultimate-oldschool-pc-font-pack
 ];
 
- #  ____             _
+#  ____             _
 # |  _ \  _____   _(_) ___ ___  ___
 # | | | |/ _ \ \ / / |/ __/ _ \/ __|
 # | |_| |  __/\ V /| | (_|  __/\__ \
