@@ -181,6 +181,7 @@ services.mullvad-vpn.enable = true;
 		xkb.options = "eurosign:e,caps:escape";
 		autoRepeatDelay = 300;
 		autoRepeatInterval = 50;
+		exportConfiguration = true;
 
     desktopManager = {
       xterm.enable = false;
@@ -188,8 +189,17 @@ services.mullvad-vpn.enable = true;
 			plasma5.enable = true;
     };
 
+    windowManager.awesome = {
+      enable = true;
+    #   luaModules = with pkgs.luajitPackages; [
+    #     luarocks # is the package manager for Lua modules
+				# luadbi
+    #     luadbi-mysql # Database abstraction layer
+    #   ];
+    };
+
     displayManager = {
-        defaultSession = "none+i3";
+        defaultSession = "none+awesome";
 				sddm.enable = true;
     };
 
@@ -306,7 +316,15 @@ users.defaultUserShell = pkgs.zsh;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-		autotiling
+		# for awesomewm
+    luajitPackages.luarocks
+		luajitPackages.luadbi
+    # luajitPackages.luadbi-mysql
+    # luajitPackages.luadbi-mysql
+    # luajitPackages.luarocks
+		networkmanagerapplet
+# for i3
+		# autotiling
 		python3
     haskellPackages.xmobar
     haskellPackages.xmonad
@@ -367,7 +385,7 @@ users.defaultUserShell = pkgs.zsh;
 														}; }))
   ];
 
-programs.dconf.enable = true;
+	programs.dconf.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
