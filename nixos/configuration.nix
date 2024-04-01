@@ -200,7 +200,7 @@ services.mullvad-vpn.enable = true;
      ];
     };
 
-		windowManager.qtile.enable = true;
+		# windowManager.qtile.enable = true;
 
 # windowManager.dwm.package = pkgs.dwm.override {
 # 	conf = ./config.def.h;
@@ -315,6 +315,7 @@ users.defaultUserShell = pkgs.zsh;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+		autotiling
 		python3
     haskellPackages.xmobar
     haskellPackages.xmonad
