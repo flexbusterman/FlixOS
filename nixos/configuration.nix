@@ -288,19 +288,7 @@ services.mullvad-vpn.enable = true;
     isNormalUser = true;
     description = "flex";
     extraGroups = [ "networkmanager" "wheel" "users"];
-# user packages
-    packages = with pkgs; [
-			reaper
-			discord
-			r2modman
-      brave
-			qutebrowser
-			dropbox
-			alacritty
-			qbittorrent
-			maestral
-			maestral-gui
-    ];
+# user packages configured in home manager
   };
 
   # Allow unfree packages

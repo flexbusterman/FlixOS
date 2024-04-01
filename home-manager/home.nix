@@ -50,16 +50,16 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     hello
-		reaper
-		discord
-		r2modman
-		brave
-		qutebrowser
-		dropbox
 		alacritty
-		qbittorrent
+		brave
+		discord
+		dropbox
 		maestral
 		maestral-gui
+		qbittorrent
+		qutebrowser
+		r2modman
+		reaper
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
