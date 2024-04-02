@@ -77,19 +77,21 @@ fonts.packages = with pkgs; [
 
 services.mullvad-vpn.enable = true;
 
-# Enable sound with pipewire.
-		sound.enable = true;
-# hardware.pulseaudio.enable = lib.mkForce false;
-	security.rtkit.enable = true;
-	services.pipewire = {
-		enable = true;
-		alsa.enable = true;
-		alsa.support32Bit = true;
-		pulse.enable = true;
-# If you want to use JACK applications, uncomment this
-		jack.enable = true;
-		wireplumber.enable = true;
-	};
+  # Enable sound with pipewire.
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    jack.enable = true;
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    wireplumber.enable = true;
+  };
 
 # nvidia config
   # Enable OpenGL
@@ -182,35 +184,33 @@ services.mullvad-vpn.enable = true;
 		autoRepeatInterval = 50;
 		exportConfiguration = true;
 
-    desktopManager = {
-      xterm.enable = false;
-# Enable the KDE Plasma Desktop Environment.
-			plasma5.enable = true;
-    };
+  displayManager = {
+		gdm.enable = true;
+		defaultSession = "none+qtile";
+		# sddm.enable = true;
+	};
 
-    windowManager.awesome = {
-      enable = true;
-    #   luaModules = with pkgs.luajitPackages; [
-    #     luarocks # is the package manager for Lua modules
-				# luadbi
-    #     luadbi-mysql # Database abstraction layer
-    #   ];
-    };
+  desktopManager.gnome.enable = true;
+	windowManager.qtile.enable = true;
 
-    displayManager = {
-        defaultSession = "none+awesome";
-				sddm.enable = true;
-    };
+    # windowManager.awesome = {
+    #   enable = true;
+    # #   luaModules = with pkgs.luajitPackages; [
+    # #     luarocks # is the package manager for Lua modules
+				# # luadbi
+    # #     luadbi-mysql # Database abstraction layer
+    # #   ];
+    # };
 
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        dmenu #application launcher most people use
-        i3status # gives you the default i3 status bar
-        i3lock #default i3 screen locker
-        i3blocks #if you are planning on using i3blocks over i3status
-     ];
-    };
+    # windowManager.i3 = {
+    #   enable = true;
+    #   extraPackages = with pkgs; [
+    #     dmenu #application launcher most people use
+    #     i3status # gives you the default i3 status bar
+    #     i3lock #default i3 screen locker
+    #     i3blocks #if you are planning on using i3blocks over i3status
+    #  ];
+    # };
 
 		# windowManager.qtile.enable = true;
 
@@ -272,25 +272,8 @@ services.mullvad-vpn.enable = true;
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # # Enable sound with pipewire.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = false;
-  # security.rtkit.enable = true;
-  # services.pipewire = {
-  #   enable = true;
-  #   alsa.enable = true;
-  #   alsa.support32Bit = true;
-  #   pulse.enable = true;
-  #   # If you want to use JACK applications, uncomment this
-  #   #jack.enable = true;
-  #
-  #   # use the example session manager (no others are packaged yet so this is enabled by default,
-  #   # no need to redefine it in your config for now)
-  #   #media-session.enable = true;
-  # };
-
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.flex = {
@@ -394,11 +377,11 @@ users.defaultUserShell = pkgs.zsh;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
+  programs.mtr.enable = true;
   programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
+     enable = true;
+     enableSSHSupport = true;
+   };
 
 boot.blacklistedKernelModules = [ "snd_pcsp" ];
 
@@ -447,7 +430,7 @@ systemd.extraConfig = ''
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -461,7 +444,7 @@ systemd.extraConfig = ''
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "23.11"; # Did you read the comment?
 
 }
 # # This is your system's configuration file.
@@ -578,5 +561,5 @@ systemd.extraConfig = ''
 #   # };
 #
 #   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-#   system.stateVersion = "23.05";
+  # system.stateVersion = "23.11"; # Did you read the comment?
 # }

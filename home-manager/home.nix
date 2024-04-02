@@ -93,7 +93,11 @@
 
 	xdg.enable = true;
   programs.home-manager.enable = true;
-  programs.git.enable = true;
+  programs.git = {
+    enable = true;
+    userName  = "Christian Augustin";
+    userEmail = "johnchristianaugustin@gmail.com";
+  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
