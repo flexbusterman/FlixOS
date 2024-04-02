@@ -397,12 +397,18 @@ users.defaultUserShell = pkgs.zsh;
 
 boot.blacklistedKernelModules = [ "snd_pcsp" ];
 
-#  ____                  _
-# / ___|  ___ _ ____   _(_) ___ ___  ___
-# \___ \ / _ \ '__\ \ / / |/ __/ _ \/ __|
-#  ___) |  __/ |   \ V /| | (_|  __/\__ \
-# |____/ \___|_|    \_/ p|_|\___\___||___/
-# services
+# ____                  _                     _
+#/ ___|  ___  _   _ ___| |_ ___ _ __ ___   __| |
+#\___ \ / _ \| | | / __| __/ _ \ '_ ` _ \ / _` |
+# ___) | (_) | |_| \__ \ ||  __/ | | | | | (_| |
+#|____/ \___/ \__, |___/\__\___|_| |_| |_|\__,_|
+#             |___/
+# systemd services
+
+# prevent 90 seconds waiting on shutdown / reboot
+systemd.extraConfig = ''
+	DefaultTimeoutStopSec=10s
+'';
 
   # systemd.user.services.dropbox = {
   #   description = "Dropbox";
@@ -541,7 +547,6 @@ boot.blacklistedKernelModules = [ "snd_pcsp" ];
 #
 #   networking.hostName = "Legion5";
 #
-#   boot.loader.systemd-boot.enable = true;
 #
 #   users.users = {
 #     flex = {
