@@ -298,6 +298,7 @@ users.defaultUserShell = pkgs.zsh;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+		ffmpeg
 		xdotool
 		ncmpcpp
 		mpc-cli
