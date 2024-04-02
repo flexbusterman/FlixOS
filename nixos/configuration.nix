@@ -437,6 +437,20 @@ systemd.extraConfig = ''
     };
   };
 
+  systemd.user.services.wallpaper = {
+    description = "Set wallpaper with feh";
+    wantedBy = [ "graphical-session.target" ];
+    serviceConfig = {
+      ExecStart = "${lib.getBin pkgs.feh}/bin/feh --bg-fill /home/flex/.local/share/flex/background.jpg";
+      ExecReload = "${lib.getBin pkgs.coreutils}/bin/kill -HUP $MAINPID";
+      KillMode = "control-group"; # upstream recommends process
+      Restart = "on-failure";
+      PrivateTmp = true;
+      ProtectSystem = "full";
+      Nice = 10;
+    };
+  };
+
 # services.pipewire.wireplumber.configPackages = [
 # 	(pkgs.writeTextDir "share/wireplumber/bluetooth.lua.d/51-bluez-config.lua" ''
 # 	 bluez_monitor.properties = {
