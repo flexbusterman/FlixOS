@@ -315,6 +315,11 @@ users.defaultUserShell = pkgs.zsh;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+		ncmpcpp
+		mpc-cli
+		mpd
+		ueberzugpp
+		sxiv
 		maim
 		# for awesomewm
     luajitPackages.luarocks
