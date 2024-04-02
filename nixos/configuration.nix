@@ -281,7 +281,7 @@ services.mullvad-vpn.enable = true;
   users.users.flex = {
     isNormalUser = true;
     description = "flex";
-    extraGroups = [ "networkmanager" "wheel" "users"];
+    extraGroups = [ "networkmanager" "wheel" "users" "realtime"];
 # user packages configured in home manager
   };
 
@@ -300,6 +300,8 @@ users.defaultUserShell = pkgs.zsh;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+		htop-vim
+		btop
 		xcalib
 		brightnessctl
 		ffmpeg

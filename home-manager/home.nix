@@ -47,6 +47,7 @@
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
+		brave
 		libsForQt5.kruler
 		slack
 		discord
@@ -65,6 +66,7 @@
 		r2modman
 		reaper
 		lutris
+		supercollider-with-sc3-plugins
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
