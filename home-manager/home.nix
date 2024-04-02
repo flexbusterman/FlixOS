@@ -47,6 +47,7 @@
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
+		tidal-hifi
 		brave
 		libsForQt5.kruler
 		slack
@@ -59,8 +60,8 @@
 		brave
 		discord
 		dropbox
-		maestral
-		maestral-gui
+		# maestral
+		# maestral-gui
 		qbittorrent
 		qutebrowser
 		r2modman

@@ -294,12 +294,25 @@ programs.steam = {
   dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
 };
 
-programs.zsh.enable = true;
 users.defaultUserShell = pkgs.zsh;
+
+programs.zsh = {
+  enable = true;
+  enableCompletion = true;
+  autosuggestions.enable = true;
+  syntaxHighlighting.enable = true;
+  shellAliases = {
+    ll = "ls -l";
+    update = "sudo nixos-rebuild switch";
+  };
+  # history.size = 10000;
+  # history.path = "${config.xdg.dataHome}/zsh/history";
+};
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+		qpwgraph
 		htop-vim
 		btop
 		xcalib
@@ -406,23 +419,23 @@ systemd.extraConfig = ''
 	DefaultTimeoutStopSec=10s
 '';
 
-  # systemd.user.services.dropbox = {
-  #   description = "Dropbox";
-  #   wantedBy = [ "graphical-session.target" ];
-  #   environment = {
-  #     QT_PLUGIN_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtPluginPrefix;
-  #     QML2_IMPORT_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtQmlPrefix;
-  #   };
-  #   serviceConfig = {
-  #     ExecStart = "${lib.getBin pkgs.dropbox}/bin/dropbox";
-  #     ExecReload = "${lib.getBin pkgs.coreutils}/bin/kill -HUP $MAINPID";
-  #     KillMode = "control-group"; # upstream recommends process
-  #     Restart = "on-failure";
-  #     PrivateTmp = true;
-  #     ProtectSystem = "full";
-  #     Nice = 10;
-  #   };
-  # };
+  systemd.user.services.dropbox = {
+    description = "Dropbox";
+    wantedBy = [ "graphical-session.target" ];
+    environment = {
+      QT_PLUGIN_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtPluginPrefix;
+      QML2_IMPORT_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtQmlPrefix;
+    };
+    serviceConfig = {
+      ExecStart = "${lib.getBin pkgs.dropbox}/bin/dropbox";
+      ExecReload = "${lib.getBin pkgs.coreutils}/bin/kill -HUP $MAINPID";
+      KillMode = "control-group"; # upstream recommends process
+      Restart = "on-failure";
+      PrivateTmp = true;
+      ProtectSystem = "full";
+      Nice = 10;
+    };
+  };
 
 # services.pipewire.wireplumber.configPackages = [
 # 	(pkgs.writeTextDir "share/wireplumber/bluetooth.lua.d/51-bluez-config.lua" ''
