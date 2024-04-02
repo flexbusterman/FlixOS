@@ -16,6 +16,8 @@
 
   environment.sessionVariables = rec {
     HEADPHONES = "50:C2:75:29:C7:6E";
+		EDITOR = "nvim";
+    BROWSER = "qutebrowser";
 	};
 
 	environment.localBinInPath = true;
