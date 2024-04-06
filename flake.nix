@@ -9,6 +9,11 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+		xmonad-contexts = {
+			url = "github:Procrat/xmonad-contexts";
+			flake = false;
+		};
+
     # Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
 

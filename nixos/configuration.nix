@@ -1,8 +1,8 @@
-# Edit this configuration file to define what should be installed on
+# Edit this conf/home/flex/.configxmonadxmonad.pes;iguration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, xmonad-contexts, ... }:
 
 {
 
@@ -195,6 +195,16 @@ services.mullvad-vpn.enable = true;
   desktopManager.gnome.enable = true;
 	windowManager.qtile.enable = true;
 
+	windowManager.xmonad = {
+		enable = true;
+		enableContribAndExtras = true;
+		ghcArgs = [
+			"-hidir /tmp" # place interface files in /tmp, otherwise ghc tries to write them to the nix store
+			"-odir /tmp" # place object files in /tmp, otherwise ghc tries to write them to the nix store
+			"-i${xmonad-contexts}" # tell ghc to search in the respective nix store path for the module
+		];
+	};
+
     # windowManager.awesome = {
     #   enable = true;
     # #   luaModules = with pkgs.luajitPackages; [
@@ -214,8 +224,6 @@ services.mullvad-vpn.enable = true;
     #  ];
     # };
 
-		# windowManager.qtile.enable = true;
-
 # windowManager.dwm.package = pkgs.dwm.override {
 # 	conf = ./config.def.h;
 #   patches = [
@@ -234,17 +242,6 @@ services.mullvad-vpn.enable = true;
 
 # windowManager.dwm.enable = true;
 
-		# windowManager.xmonad = {
-		# 	enable = true;
-		# 	enableContribAndExtras = true;
-		# 	# config = builtins.readFile ./dotfiles/xmonad/xmonad.hs;
-		# 	ghcArgs = [
-		# 		"-hidir /tmp" # place interface files in /tmp, otherwise ghc tries to write them to the nix store
-		# 		"-odir /tmp" # place object files in /tmp, otherwise ghc tries to write them to the nix store
-		# 		"-i${xmonad-contexts}" # tell ghc to search in the respective nix store path for the module
-		# 	];
-		# };
-
 		#	displayManager.lightdm.enable = true;
 		# desktopManager.xfce.enable = true;
 		# windowManager.dwm.package = pkgs.dwm.overrideAttrs (oldAttrs: rec {
@@ -255,9 +252,9 @@ services.mullvad-vpn.enable = true;
 		# 		});
 		# windowManager.dwm.enable = true;
 
-		# windowManager.bspwm = {
-		# 	enable = true;
-		# };
+		windowManager.bspwm = {
+			enable = true;
+		};
 
 		# windowManager.spectrwm = {
 		# 	enable = true;
