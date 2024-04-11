@@ -24,6 +24,7 @@
 
 nix.settings.allowed-users = ["root" "flex"];
 nix.settings.trusted-users = ["root" "flex"];
+nix.settings.tarball-ttl = 2;
 
   # This will add each flake input as a registry
   # To make nix3 commands consistent with your flake
@@ -188,7 +189,7 @@ services.mullvad-vpn.enable = true;
 
   displayManager = {
 		gdm.enable = true;
-		defaultSession = "none+qtile";
+		defaultSession = "none+dwm";
 		# sddm.enable = true;
 	};
 
@@ -244,13 +245,17 @@ services.mullvad-vpn.enable = true;
 
 		#	displayManager.lightdm.enable = true;
 		# desktopManager.xfce.enable = true;
-		# windowManager.dwm.package = pkgs.dwm.overrideAttrs (oldAttrs: rec {
-		# 		src = builtins.fetchTarball {
-		# 		url = "https://github.com/flexbusterman/dwm/archive/flexmaster.tar.gz";
-		# 		# sha256 = "0azn8xqh9ig6bk639wywqdx8hay9ch6nk62scij7zs2xd22yv8c4";
-		# 		};
-		# 		});
-		# windowManager.dwm.enable = true;
+
+		windowManager.dwm.package = pkgs.dwm.overrideAttrs (oldAttrs: rec {
+				src = builtins.fetchTarball {
+				url = "https://github.com/flexbusterman/dwm/archive/flexmaster.tar.gz";
+				# new
+				# sha256 = "1qjpx484pdqqzvwqlh6kxj7xayl92r300rr27vk7an6cm18q1p5h";
+				# old
+				sha256 = "0azn8xqh9ig6bk639wywqdx8hay9ch6nk62scij7zs2xd22yv8c4";
+				};
+				});
+		windowManager.dwm.enable = true;
 
 		windowManager.bspwm = {
 			enable = true;
