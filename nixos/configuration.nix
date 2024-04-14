@@ -189,7 +189,7 @@ services.mullvad-vpn.enable = true;
 
   displayManager = {
 		gdm.enable = true;
-		defaultSession = "none+dwm";
+		defaultSession = "none+xmonad";
 		# sddm.enable = true;
 	};
 
@@ -199,11 +199,6 @@ services.mullvad-vpn.enable = true;
 	windowManager.xmonad = {
 		enable = true;
 		enableContribAndExtras = true;
-		ghcArgs = [
-			"-hidir /tmp" # place interface files in /tmp, otherwise ghc tries to write them to the nix store
-			"-odir /tmp" # place object files in /tmp, otherwise ghc tries to write them to the nix store
-			"-i${xmonad-contexts}" # tell ghc to search in the respective nix store path for the module
-		];
 	};
 
     # windowManager.awesome = {
@@ -314,6 +309,7 @@ programs.zsh = {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+		trayer
 		python311Packages.iwlib
 		qpwgraph
 		htop-vim
@@ -389,6 +385,7 @@ programs.zsh = {
 		xclip
 		xlockmore
 		xorg.xkill
+		xorg.xev
 		xsel
 		zplug
 		zsh
