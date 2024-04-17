@@ -416,6 +416,9 @@ boot.blacklistedKernelModules = [ "snd_pcsp" ];
 #             |___/
 # systemd services
 
+ services.locate.enable = true;
+   services.locate.package = pkgs.mlocate;
+
 # prevent 90 seconds waiting on shutdown / reboot
 systemd.extraConfig = ''
 	DefaultTimeoutStopSec=10s

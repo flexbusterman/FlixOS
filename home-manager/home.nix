@@ -40,6 +40,12 @@
 
   home.username = "flex";
   home.homeDirectory = "/home/flex";
+	home.pointerCursor = {
+		name = "simp1e-cursors";
+		package = pkgs.simp1e-cursors;
+		size = 48;
+		gtk.enable = true;
+	};
   xdg.cacheHome = "/home/flex/.cache";
   xdg.configHome = "/home/flex/.config";
   xdg.dataHome = "/home/flex/.local/share";
