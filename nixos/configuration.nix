@@ -309,6 +309,7 @@ programs.zsh = {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+		sxhkd
 		mlocate
 		xdragon
 		trayer
@@ -416,8 +417,12 @@ boot.blacklistedKernelModules = [ "snd_pcsp" ];
 #             |___/
 # systemd services
 
- services.locate.enable = true;
-   services.locate.package = pkgs.mlocate;
+# mlocate
+services.locate = {
+	enable = true;
+	package = pkgs.mlocate;
+	localuser = null;
+};
 
 # prevent 90 seconds waiting on shutdown / reboot
 systemd.extraConfig = ''
